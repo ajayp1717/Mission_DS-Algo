@@ -7,7 +7,7 @@ public:
         while(lo<=hi){
             mid=lo+(hi-lo)/2;
             if(nums[mid]==target)return true;
-            if(nums[mid]==nums[lo]&& nums[mid]==nums[hi]){
+            if(nums[mid]==nums[lo]&& nums[mid]==nums[hi]){ //case that causes problem
                 lo++,hi--;
                 continue;
             }
