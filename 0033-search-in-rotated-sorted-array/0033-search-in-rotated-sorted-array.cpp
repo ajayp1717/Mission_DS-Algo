@@ -4,13 +4,10 @@ public:
         
         int lo=0,hi=nums.size()-1;
         int mid;
-        
         while(lo<=hi){
             mid=(hi+lo)/2;
-            bool isSorted=(nums[lo]<=nums[mid]); //is left half sorted
-
             if(nums[mid]==target)return mid;
-            else if(isSorted){
+            else if(nums[lo]<=nums[mid]){      //is left half sorted
                 if(nums[mid]>=target && nums[lo]<=target)
                     hi=mid-1;
                 else lo=mid+1;
