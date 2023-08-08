@@ -10,7 +10,7 @@ public:
             bool isSorted=(nums[lo]<=nums[mid]); //is left half sorted
 
             if(nums[mid]==target)return mid;
-            if(isSorted){
+            else if(isSorted){
                 if(nums[mid]>=target && nums[lo]<=target)
                     hi=mid-1;
                 else lo=mid+1;
