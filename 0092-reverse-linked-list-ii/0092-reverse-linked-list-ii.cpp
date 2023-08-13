@@ -23,25 +23,24 @@ public:
         dummy->next=head;
         
         ListNode* bef=dummy; //before
-        ListNode* prev=NULL;     
-        ListNode* nxt=NULL;
-
         for(int i=0;i<left-1;++i){
-            bef=bef->next;
+            bef=bef->next;            //reach to left
         }
         ListNode* curr=bef->next; 
-        ListNode* newTail=curr;
+        //maintaining pointers for future use
+        ListNode* newTail=curr;         
 
+        ListNode* prev=NULL;     
+        ListNode* nxt=NULL;
         for(int i=left;i<=right;++i){
             nxt= curr->next;
-            curr->next=prev;
+            curr->next=prev;           //reverse left to right
             prev=curr;
             curr=nxt;
         }
         bef->next=prev;
-        newTail->next=curr;
+        newTail->next=curr;   //connect reversed sublist
         
         return dummy->next;
-        
     }
 };
