@@ -34,9 +34,6 @@ public:
         greaterEqual->next=NULL;
 
         ListNode* newHead=smallerHead->next;
-        delete smallerHead;
-        delete greaterEqualHead;
-
         return newHead;
     }
 };
