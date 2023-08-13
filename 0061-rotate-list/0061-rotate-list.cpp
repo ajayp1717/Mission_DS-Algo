@@ -23,23 +23,18 @@ public:
         if(head==NULL)return NULL;
         if(head->next==NULL)return head;
         int n=LLsize(head);
-        ListNode* curr=head;
-        int l=0;
-        while(++l && curr){
-            if(l==n){
-                curr->next=head;
-                break;
-            }
-            curr=curr->next;
+        ListNode* oTail = head;
+        for (int i = 0; oTail->next != nullptr; i++) {
+            oTail = oTail->next;
         }
-        l=0;
-        curr=head;
-        while(++l<n-k%n ){
-            curr=curr->next;
+        oTail->next = head;
+        ListNode* nTail=head;
+        int i=0;
+        while((i++)<n-k%n-1){
+            nTail=nTail->next;
         }
-        head=curr->next;
-        curr->next=NULL;
-
-        return head;
+        ListNode* nHead=nTail->next;
+        nTail->next=NULL;
+        return nHead;
     }
 };
