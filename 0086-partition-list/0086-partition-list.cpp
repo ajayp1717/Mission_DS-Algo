@@ -11,29 +11,30 @@
 class Solution {
 public:
     ListNode* partition(ListNode* head, int x) {
-        
-        ListNode* smallerHead=new ListNode(0);
-        ListNode* smaller=smallerHead;
-        ListNode* greaterEqualHead=new ListNode(0);
-        ListNode* greaterEqual=greaterEqualHead;
+        if(!head || !head->next)return head;
+        ListNode* sHead=new ListNode(0);
+        ListNode* sH=sHead;
+        ListNode* gHead=new ListNode(0);
+        ListNode* gH=gHead;
 
         ListNode* curr=head;
+
         while(curr){
-            if(curr->val < x){
-                smaller->next=curr;
-                smaller=smaller->next;
+            if(curr->val<x){
+                sH->next=curr;
+                sH=sH->next;
             }
             else{
-                greaterEqual->next=curr;
-                greaterEqual=greaterEqual->next;
+                gH->next=curr;
+                gH=gH->next;
             }
-            curr=curr->next;  
+            curr=curr->next;
         }
-        //Join two partitions
-        smaller->next=greaterEqualHead->next;
-        greaterEqual->next=NULL;
+        sH->next=gHead->next;
+        gH->next=NULL;
+        
+        return sHead->next;
 
-        ListNode* newHead=smallerHead->next;
-        return newHead;
+        
     }
 };
