@@ -7,6 +7,7 @@ public:
             }
             return;
         }
+        if(n<idx)return;
         for (int i = idx; i <= 9 ; ++i){
             ds.push_back(i);
             helper(i+ 1, k, n-i, ans, ds);
