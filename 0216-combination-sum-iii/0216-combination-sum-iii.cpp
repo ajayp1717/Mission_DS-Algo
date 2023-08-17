@@ -7,12 +7,10 @@ public:
             }
             return;
         }
-        if (idx <=9) {
-            ds.push_back(idx);
-            helper(idx + 1, k, n-idx, ans, ds);
+        for (int i = idx; i <= 9 ; ++i){
+            ds.push_back(i);
+            helper(i+ 1, k, n-i, ans, ds);
             ds.pop_back();
-            
-            helper(idx + 1,k, n,ans,ds);
         }
     }
     
