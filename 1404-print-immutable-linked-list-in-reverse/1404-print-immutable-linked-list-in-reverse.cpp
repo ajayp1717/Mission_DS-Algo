@@ -11,10 +11,9 @@
 class Solution {
 public:
     void printLinkedListInReverse(ImmutableListNode* head) {
-        if(head==NULL)return;
-
-        printLinkedListInReverse(head->getNext());
-        head->printValue();
-        
+        if(head){
+            printLinkedListInReverse(head->getNext());
+            head->printValue();
+        }
     }
 };
