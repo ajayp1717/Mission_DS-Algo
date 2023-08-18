@@ -12,7 +12,7 @@ public:
         int ans=0;
         for (int i = 0; i < n; ++i) {
             for (int j = i + 1; j < n; ++j) {
-                int temp = adj[i].size() + adj[j].size();
+                int temp = inD[i]+ inD[j];
                 ans= adj[i].count(j) ? max(ans,temp-1):max(ans,temp);
             }
         }
