@@ -11,25 +11,29 @@
  */
 class Solution {
 public:
+    unordered_map<int, int> Mp;
+
     TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
+        if (inorder.empty()) return NULL;
 
-        if(postorder.empty())return NULL;
-        unordered_map<int,int>Mp;
-        for(int i=0;i<inorder.size();i++)Mp[inorder[i]]=i;
+        for (int i = 0; i < inorder.size(); i++) {
+            Mp[inorder[i]] = i;
+        }
 
-        TreeNode* root=new TreeNode(postorder[postorder.size()-1]);
-        int rootIdx=Mp[root->val];
-
-        vector<int>leftIO(inorder.begin(),inorder.begin()+rootIdx);
-        vector<int>rightIO(inorder.begin()+rootIdx+1,inorder.end());
-
-        vector<int>leftPO(postorder.begin(),postorder.begin()+leftIO.size());
-        vector<int>rightPO(postorder.begin()+leftIO.size(),postorder.end()-1);
-
-        root->left=buildTree(leftIO,leftPO);
-        root->right=buildTree(rightIO,rightPO);
-
-        return root;
-        
+        int postIdx = postorder.size() - 1;
+        return getTree(postorder, 0, inorder.size() - 1, postIdx);
     }
+
+    TreeNode* getTree(vector<int>& postorder, int left, int right, int& postIdx) {
+        if (left > right || postIdx < 0) return NULL;
+
+        int rootVal = postorder[postIdx--];
+        TreeNode* root = new TreeNode(rootVal);
+
+        root->right = getTree(postorder, Mp[rootVal] + 1, right, postIdx);
+        root->left = getTree(postorder, left, Mp[rootVal] - 1, postIdx);
+            
+        return root;
+    }
+
 };
