@@ -1,21 +1,30 @@
 class Solution {
 public:
+   struct Compare {
+        bool operator()(const std::pair<char, int>& a, const std::pair<char, int>& b) {
+            return a.second < b.second;
+        }
+    };
     string reorganizeString(string s) {
         unordered_map<char,int>Mp;
         for(char c:s)Mp[c]++;
         int tot=s.size();
-        vector<pair<char,int>>cF;
+        auto compare=[](const auto& a,const auto& b){
+            return a.second<b.second;};
+        priority_queue<pair<char,int>,vector<pair<char,int>>,Compare>pq;
+        
         for(auto x:Mp){
-            cF.push_back(x);
+            pq.push(x);
         }
-        sort(cF.begin(),cF.end(),[](const auto& a, const auto& b){
-            return a.second>b.second;
-        });
-        int maxi=cF[0].second;
+        
+        int maxi=pq.top().second;
         if(maxi>(tot+1)/2)return "";
+
         string ans(tot,'#');
         int idx=0;
-        for( auto& x:cF){
+        while( !pq.empty()){
+            auto x=pq.top();
+            pq.pop();
             while(x.second){
                 if(idx>=tot)idx=1; //start filling odd indices;
                 ans[idx]=x.first;
@@ -23,8 +32,6 @@ public:
                 idx+=2;
             }
         }
-        return ans;
-        
-        
+        return ans;  
     }
 };
