@@ -1,30 +1,44 @@
 class Solution {
 public:
     vector<string> fullJustify(vector<string>& words, int maxWidth) {
-        vector<string> res;
-        vector<string> cur;
-        int num_of_letters = 0;
-
-        for (string word : words) {
-            if (word.size() + cur.size() + num_of_letters > maxWidth) {
-                for (int i = 0; i < maxWidth - num_of_letters; i++) {
-                    cur[i % (cur.size() - 1 ? cur.size() - 1 : 1)] += ' ';
-                }
-                res.push_back("");
-                for (string s : cur) res.back() += s;
-                cur.clear();
-                num_of_letters = 0;
+        vector<string> ans;
+        int n=words.size();
+        int i=0,j,linelength,numWords,numSpaces,spaceBetweenWords,extraSpaces;
+        string line;
+        while(i<n){
+            linelength=words[i].size();
+            j=i+1;
+            while(j<n && linelength+words[j].size()+(j-i)<=maxWidth){
+                linelength+=words[j].size();
+                j++;
             }
-            cur.push_back(word);
-            num_of_letters += word.size();
+
+            numWords=j-i;
+            numSpaces=maxWidth-linelength;
+
+            if(numWords==1 || j==n){
+                line=words[i];
+                for(int k=i+1;k<j;k++){
+                    line+=' '+words[k];
+                }
+                line+=string(maxWidth-line.size(),' ');
+            }
+            else{
+                spaceBetweenWords=numSpaces/(numWords-1);
+                extraSpaces=numSpaces%(numWords-1);
+                line=words[i];
+                for(int k=i+1;k<j;k++){
+                    line+=string(spaceBetweenWords,' ');
+                    if(extraSpaces>0){
+                        line+=' ';
+                        extraSpaces--;
+                    }
+                    line+=words[k];
+                }
+            }
+            ans.push_back(line);
+            i=j;
         }
-
-        string last_line = "";
-        for (string s : cur) last_line += s + ' ';
-        last_line = last_line.substr(0, last_line.size()-1);  // remove trailing space
-        while (last_line.size() < maxWidth) last_line += ' ';
-        res.push_back(last_line);
-
-        return res;
+        return ans;
     }
 };
