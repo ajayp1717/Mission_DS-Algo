@@ -46,21 +46,37 @@ struct Node
 class Solution
 {
     public:
+    Node* reverseLL(Node* node){
+        Node* prev=NULL;
+        Node* curr=node;
+        Node* nxt=NULL;
+        
+        while(curr){
+            nxt=curr->next;;
+            curr->next=prev;
+            prev=curr;
+            curr=nxt;
+        }
+        node=prev;
+    }
     Node *compute(Node *head)
     {
         // your code goes here
         if(!head || !head->next)return head;
-        Node* curr=head;
         
+        head=reverseLL(head);
+        Node* curr=head;
+        int maxi=curr->data;
         while(curr->next){
-            if(curr->data<curr->next->data){
-                curr->data=curr->next->data;
+            if(curr->next->data < maxi){
                 curr->next=curr->next->next;
-                curr=head;
             }
             else curr=curr->next;
+            maxi=max(maxi,curr->data);
+            
         }
-        return head;
+        
+        return reverseLL(head);
     }
     
     
