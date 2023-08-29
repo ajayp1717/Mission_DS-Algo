@@ -49,22 +49,21 @@ class Solution
     Node *compute(Node *head)
     {
         // your code goes here
-       if(!head || !head->next) return head;
-        Node *temp = head;
+        if(!head || !head->next)return head;
+        Node* curr=head;
         
-        while(temp->next != NULL)
-        {
-            if(temp->next->data > temp->data)
-            {
-                temp->data = temp->next->data;
-                temp->next = temp->next->next;
-                temp = head;
+        while(curr->next){
+            if(curr->data<curr->next->data){
+                curr->data=curr->next->data;
+                curr->next=curr->next->next;
+                curr=head;
             }
-            else
-                temp = temp->next;
+            else curr=curr->next;
         }
         return head;
     }
+    
+    
     
 };
    
