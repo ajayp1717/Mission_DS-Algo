@@ -6,7 +6,7 @@ public:
         for(auto x:nums)Mp[x]++;
 
         auto comp = [](auto& a, auto& b) {
-            return a.second < b.second; 
+            return a.second > b.second; 
             };
 
         // Create the priority queue with the custom comparator
@@ -14,8 +14,9 @@ public:
             
         for(auto x:Mp){
             pq.push({x.first,x.second});
+            if(pq.size()>k)pq.pop();
         }
-        while(k--){
+        while(!pq.empty()){
             int temp=pq.top().first;
             pq.pop();
             ans.push_back(temp);
