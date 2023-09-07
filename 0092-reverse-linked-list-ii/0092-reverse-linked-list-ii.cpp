@@ -10,11 +10,6 @@
  */
 class Solution {
 public:
-    // ListNode* reverseLL(ListNode* s,ListNode* e){
-
-    //     if(!head || !head->next)return head;
-
-    // }
     ListNode* reverseBetween(ListNode* head, int left, int right) {
 
         if(!head || !head->next || left==right)return head;
