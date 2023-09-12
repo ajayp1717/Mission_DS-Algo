@@ -11,7 +11,7 @@ class Solution {
         for(long long i=2;i<=pow(N,0.5);i++){
             if(N%i==0){
                 sum+=i;
-                if(sum==N)return 1;
+                // if(sum==N)return 1;
                 sum+=(N/i);
             }
             if(sum==N)return 1;
