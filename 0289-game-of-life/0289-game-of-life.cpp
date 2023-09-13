@@ -1,11 +1,14 @@
 class Solution {
 public:
+    vector<vector<int>> ways={{0,1},{1,0},{1,1},
+        {0,-1},{-1,0},{-1,1},{-1,-1},{1,-1}};
+    
+    
     void gameOfLife(vector<vector<int>>& board) {
         int n=board.size(),m=board[0].size();
-        vector<vector<int>> ways={{0,1},{1,0},{1,1},
-        {0,-1},{-1,0},{-1,1},{-1,-1},{1,-1}};
-        
-        vector<vector<int>>ans=board;
+        set<pair<int,int>>zero;
+        set<pair<int,int>>one;
+
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
                 int cnt1=0;
@@ -18,14 +21,19 @@ public:
                     }
                 }
                 if(board[i][j]==1){
-                    if(cnt1<2 || cnt1>3)ans[i][j]=0;
+                    if(cnt1<2 || cnt1>3)zero.insert({i,j});
                 }
                 else{
-                    if(cnt1==3)ans[i][j]=1;
+                    if(cnt1==3)one.insert({i,j});
                 }
             }
         }
-        board=ans;
+        for(int ro=0;ro<n;ro++){
+            for(int col=0;col<m;col++){
+                if(one.count({ro,col}))board[ro][col]=1;
+                else if(zero.count({ro,col}))board[ro][col]=0;
+            }
+        }
         
     }
 };
