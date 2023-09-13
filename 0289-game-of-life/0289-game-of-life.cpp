@@ -17,21 +17,21 @@ public:
                     int n_j=j+x[1];
                     if(n_i>=0 && n_j>=0 && n_i<n && n_j<m)
                     {
-                        if(board[n_i][n_j]==1)cnt1++;
+                        if(abs(board[n_i][n_j])==1)cnt1++;
                     }
                 }
-                if(board[i][j]==1){
-                    if(cnt1<2 || cnt1>3)zero.insert({i,j});
+                if((board[i][j])==1){
+                    if(cnt1<2 || cnt1>3)board[i][j]=-1;
                 }
-                else{
-                    if(cnt1==3)one.insert({i,j});
+                else {
+                    if(cnt1==3)board[i][j]=2;
                 }
             }
         }
         for(int ro=0;ro<n;ro++){
             for(int col=0;col<m;col++){
-                if(one.count({ro,col}))board[ro][col]=1;
-                else if(zero.count({ro,col}))board[ro][col]=0;
+                if(board[ro][col]== -1)board[ro][col]=0;
+                else if(board[ro][col]==2)board[ro][col]=1;
             }
         }
         
