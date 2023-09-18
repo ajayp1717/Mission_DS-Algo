@@ -2,7 +2,6 @@ class Solution {
 public:
     vector<int> kWeakestRows(vector<vector<int>>& mat, int k) {
         int n=mat.size(),m=mat[0].size();
-        unordered_map<int,int>Mp;
         vector<pair<int,int>> temp;
         for(int i=0;i<n;i++){
             int cnt=0;
