@@ -11,22 +11,19 @@ public:
     }
     vector<int> kWeakestRows(vector<vector<int>>& mat, int k) {
         int n=mat.size(),m=mat[0].size();
-        vector<pair<int,int>> temp;
+        priority_queue<pair<int,int>>pq;
         for(int i=0;i<n;i++){
             int cnt=binSearch(mat[i]);
-            temp.push_back({cnt,i});
+            pq.push({cnt,i});
+            if(pq.size()>k)pq.pop();
         }
-        sort(temp.begin(),temp.end());
-        vector<int> ans(k);
-        int i=0;
-        for(auto x:temp){
-            ans[i]=x.second;
-            if(i==k-1)break;
-            i++;
+        
+        vector<int> ans;
+        for(int i=0;i<k;i++){
+            ans.push_back(pq.top().second);
+            pq.pop();
         }
+        reverse(ans.begin(),ans.end());
         return ans;
-        
-
-        
     }
 };
