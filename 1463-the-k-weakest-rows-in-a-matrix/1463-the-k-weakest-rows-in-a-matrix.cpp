@@ -18,12 +18,12 @@ public:
             if(pq.size()>k)pq.pop();
         }
         
-        vector<int> ans;
-        for(int i=0;i<k;i++){
-            ans.push_back(pq.top().second);
+        vector<int> ans(k);
+        for(int i=k-1;i>=0;i--){
+            ans[i]=(pq.top().second);
             pq.pop();
         }
-        reverse(ans.begin(),ans.end());
+        
         return ans;
     }
 };
