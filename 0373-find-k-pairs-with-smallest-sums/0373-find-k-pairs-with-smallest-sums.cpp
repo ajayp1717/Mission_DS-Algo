@@ -10,9 +10,11 @@ public:
         vector<pair<int,pair<int,int>>>,
         greater<pair<int,pair<int,int>>>>pq;
 
-        pq.push({nums1[0]+nums2[0],{0,0}});
-        vis.insert({0,0});
-        
+        for(int i=0;i<n;i++){
+            pq.push({nums1[i]+nums2[0],{i,0}});
+            vis.insert({i,0});
+        }
+
         while(k-- && !pq.empty()){
             auto tupl=pq.top();
             pq.pop();
@@ -24,10 +26,6 @@ public:
             if(j+1<m && !vis.count({i,j+1})){
                 pq.push({nums1[i]+nums2[j+1],{i,j+1}});
                 vis.insert({i,j+1});
-            }
-            if(i+1<n && !vis.count({i+1,j})){
-                pq.push({nums1[i+1]+nums2[j],{i+1,j}});
-                vis.insert({i+1,j});
             }
         }
         return ans;
