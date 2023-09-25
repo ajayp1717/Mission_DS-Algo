@@ -12,7 +12,6 @@ public:
 
         for(int i=0;i<n;i++){
             pq.push({nums1[i]+nums2[0],{i,0}});
-            vis.insert({i,0});
         }
 
         while(k-- && !pq.empty()){
@@ -23,9 +22,8 @@ public:
 
             ans.push_back({nums1[i],nums2[j]});
             
-            if(j+1<m && !vis.count({i,j+1})){
+            if(j+1<m ){
                 pq.push({nums1[i]+nums2[j+1],{i,j+1}});
-                vis.insert({i,j+1});
             }
         }
         return ans;
