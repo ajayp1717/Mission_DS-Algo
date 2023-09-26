@@ -2,30 +2,29 @@ class Solution {
 public:
     string removeDuplicateLetters(string s) {
 
-        // storing last occurrence index of each character
-        vector<int> lastOcc(26, -1); 
-        vector<bool> used(26, false); 
-        string res = "";
+        vector<int>used(26,0);
+        vector<int>lastOccur(26,-1);
+        string ans="";
+        stack<char>St;
 
-        for (int i = 0; i < s.length(); i++) {
-            lastOcc[s[i] - 'a'] = i;
+        for(int i=0;i<s.length();i++){
+            lastOccur[s[i]-'a']=i;
         }
+        for(int i=0;i<s.length();i++){
+            char curr=s[i];
+            if(used[curr -'a'])continue;
 
-        for (int i = 0; i < s.length(); i++) {
-            char curr = s[i];
-
-            if (used[curr - 'a']) {
-                continue;
+            while(!St.empty() && curr< St.top() && i< lastOccur[St.top()-'a']){
+                used[St.top()-'a']=0;
+                St.pop();
             }
-        //removing chars from res if they are -gt curr and they appear later in string
-            while (!res.empty() && curr < res.back() && i < lastOcc[res.back() - 'a']) {
-                used[res.back() - 'a'] = false;
-                res.pop_back();
-            }
-            res += curr;
-            used[curr - 'a'] = true;
+            St.push(curr);
+            used[curr-'a']=1;
         }
-        return res;
+        while(!St.empty()){
+            ans=St.top()+ans;
+            St.pop();
+        }
+        return ans;
     }
-
 };
