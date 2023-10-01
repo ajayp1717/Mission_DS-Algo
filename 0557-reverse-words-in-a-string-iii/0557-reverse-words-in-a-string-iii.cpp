@@ -3,18 +3,15 @@ public:
     string reverseWords(string s) {
         string temp="";
         string ans="";
-        for(int i=0;i<s.length();i++){
+        for(int i=s.length()-1;i>=0;i--){
             if(s[i]==' '){
-                reverse(temp.begin(),temp.end());
-                ans+=temp;
-                ans+=' ';
+                ans=' '+temp+ans;
                 temp="";
             }
             else    temp+=s[i];
         }
         if(!temp.empty()){
-            reverse(temp.begin(),temp.end());
-            ans+=temp;
+            ans=temp+ans;
         }
         return ans;
     }
