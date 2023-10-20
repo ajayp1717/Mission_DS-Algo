@@ -1,25 +1,39 @@
 class Solution {
 public:
-        bool backspaceCompare(string S, string T) {
-        int i = S.length() - 1, j = T.length() - 1, back;
-        while (true) {
-            back = 0;
-            while (i >= 0 && (back > 0 || S[i] == '#')) {
-                back += S[i] == '#' ? 1 : -1;
-                i--;
-            }
-            back = 0;
-            while (j >= 0 && (back > 0 || T[j] == '#')) {
-                back += T[j] == '#' ? 1 : -1;
-                j--;
-            }
-            if (i >= 0 && j >= 0 && S[i] == T[j]) {
-                i--;
-                j--;
+    string erase(string str) {
+        int i = str.length() - 1;
+        string temp = "";
+        int cnt = 0;
+        while (i >= 0) {
+            if (str[i] == '#') {
+                while (i >= 0 && str[i] == '#') {
+                    cnt++;
+                    i--;
+                }
+                while (i >= 0 && cnt > 0) {
+                    if (str[i] != '#') {
+                        cnt--;
+                    } else {
+                        cnt++;
+                    }
+                    i--;
+                }
             } else {
-                break;
+                temp = str[i] + temp;
+                i--;
             }
         }
-        return i == -1 && j == -1;
+        return temp;
+    }
+
+    bool backspaceCompare(string s, string t) {
+        if(s==t)return true;
+
+        string s1=erase(s);
+        string t1=erase(t);
+        cout<<s1<<" "<<t1<<endl;
+        return s1==t1;
+        
+        
     }
 };
