@@ -31,7 +31,6 @@ public:
 
         string s1=erase(s);
         string t1=erase(t);
-        cout<<s1<<" "<<t1<<endl;
         return s1==t1;
         
         
